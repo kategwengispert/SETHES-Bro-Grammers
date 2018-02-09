@@ -41,7 +41,8 @@ public class LoginServlet2 extends HttpServlet {
 			Statement stmt = con.createStatement();
 			
 			
-			if(Character.isLetter(UserName.charAt(0))){
+			if(Character.isLetter(UserName.charAt(0)))
+			{
 						url = "encoderprofile.jsp";
 						ResultSet rs = stmt.executeQuery("select * from admin where AID="+UserName);
 						while(rs.next()){
@@ -62,10 +63,10 @@ public class LoginServlet2 extends HttpServlet {
 			else if(Character.isDigit(UserName.charAt(0)))
 			{
 						url = "studentprofile.jsp";
-						ResultSet rs = stmt.executeQuery("select * from student where SID="+UserName);
+						ResultSet rs = stmt.executeQuery("select * from admin where AID="+UserName);
 						while(rs.next()){
-							System.out.println(rs.getString("SID"));
-							if(UserName.equals(rs.getString("SID")) 
+							System.out.println(rs.getString("AID"));
+							if(UserName.equals(rs.getString("AID")) 
 									&& Password.equals(rs.getString("password"))){
 									logged = true;
 									name = rs.getString("name");
@@ -76,7 +77,7 @@ public class LoginServlet2 extends HttpServlet {
 								logged = false;
 							}
 						}
-					}
+			}
 	
 			
 			if(logged == true){
