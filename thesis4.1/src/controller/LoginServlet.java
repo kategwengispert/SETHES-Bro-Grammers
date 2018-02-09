@@ -36,17 +36,17 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(Password);
 		
 		if(Character.isDigit(UserName.charAt(0))){
-			url = "studentprofile.jsp";
+			url = "encoderprofile.jsp";
 			try{
 				
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ivaluate-db", "root", "");
 				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery("select * from student where SID="+UserName);
+				ResultSet rs = stmt.executeQuery("select * from admin where AID="+UserName);
 				
 				while(rs.next()){
-					System.out.println(rs.getString("SID"));
-					if(UserName.equals(rs.getString("SID")) 
+					System.out.println(rs.getString("AID"));
+					if(UserName.equals(rs.getString("AID")) 
 							&& Password.equals(rs.getString("password"))){
 							logged = true;
 							name = rs.getString("name");
@@ -81,13 +81,13 @@ public class LoginServlet extends HttpServlet {
 					}
 				}
 			}catch(Exception e){
-				System.out.println("error on login");
+				System.out.println(e.getMessage());
 		}
 		
 			
 			
-		}
-		if (!Character.isDigit(UserName.charAt(0))){
+		
+		/*if (!Character.isDigit(UserName.charAt(0))){
 			url = "encoderprofile.jsp";
 			System.out.println(UserName.charAt(0));
 			try{
@@ -120,7 +120,7 @@ public class LoginServlet extends HttpServlet {
 				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
-			}
+			}*/
 		}
 		
 	}

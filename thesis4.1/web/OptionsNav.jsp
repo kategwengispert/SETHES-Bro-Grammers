@@ -23,7 +23,7 @@
   <ul class="dropdown-menu dropdown-menu-blue" aria-labelledby="dropdownMenu1">
     <li><a href="options.action" >View Records</a></li>
     <li><a href="options3.action" >View Class</a></li>
-    <li><a href="" >View Students</a></li>
+    <li><a href="options.action" >View Students</a></li>
     <li><a href="options2.action" >View Professors</a></li>
     <li><a href="" >Results</a></li>
     <li><a href="" >Students with Deficiency</a></li>

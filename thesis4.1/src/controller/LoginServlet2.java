@@ -41,14 +41,15 @@ public class LoginServlet2 extends HttpServlet {
 			Statement stmt = con.createStatement();
 			
 			
-			if(Character.isLetter(UserName.charAt(0)))
+			if(UserName.length() == 5)
 			{
-						url = "encoderprofile.jsp";
+						
 						ResultSet rs = stmt.executeQuery("select * from admin where AID="+UserName);
 						while(rs.next()){
 							System.out.println(rs.getString("AID"));
 							if(UserName.equals(rs.getString("AID")) 
 									&& Password.equals(rs.getString("password"))){
+									url ="encoderprofile.jsp";
 									logged = true;
 									name = rs.getString("AID");
 									System.out.println("while" + UserName);
@@ -58,15 +59,16 @@ public class LoginServlet2 extends HttpServlet {
 								logged = false;
 							}
 						}
+						
 			
 			}
-			else if(Character.isDigit(UserName.charAt(0)))
+			else if(UserName.length() == 9)
 			{
-						url = "studentprofile.jsp";
-						ResultSet rs = stmt.executeQuery("select * from admin where AID="+UserName);
+						url ="studentprofile.jsp";
+						ResultSet rs = stmt.executeQuery("select * from student where SID="+UserName);
 						while(rs.next()){
-							System.out.println(rs.getString("AID"));
-							if(UserName.equals(rs.getString("AID")) 
+							System.out.println(rs.getString("SID"));
+							if(UserName.equals(rs.getString("SID")) 
 									&& Password.equals(rs.getString("password"))){
 									logged = true;
 									name = rs.getString("name");
@@ -77,7 +79,7 @@ public class LoginServlet2 extends HttpServlet {
 								logged = false;
 							}
 						}
-			}
+					}
 	
 			
 			if(logged == true){
@@ -89,10 +91,16 @@ public class LoginServlet2 extends HttpServlet {
 				sched.setStudentID(UserName);
 				System.out.println("Set SID : " + sched.getStudentID() );
 				
-				/*ResultSet records =
+				ResultSet records =
 						DBSQLOperation.getAllRecords(sched, con);
-				request.setAttribute("records", records);*/
+				
+				
+				
+				request.setAttribute("records", records);
 				request.getRequestDispatcher(url).forward(request, response);
+				
+			
+			
 				}else{
 				response.sendRedirect("index.jsp");
 				System.out.println("Error");
